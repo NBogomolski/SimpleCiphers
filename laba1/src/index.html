@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello World!</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+
+    <body>
+        <div class="instruction">
+            <h1>Encoder/Decoder</h1>
+            <p>Select the mode and the algorithm</p>
+        </div>
+        <div class="flex-container">
+          <div class="mode">
+            Mode:<br/>
+              <input type="radio" name="mode" value="encipher" /><span class="checkmark"></span>Encipher<br/>
+              <input type="radio" name="mode" value="decipher" /><span class="checkmark"></span>Decipher
+          </div>
+            <button class="column-method flex-item">Column method</button>
+            <button class="vizhener-selfgen flex-item">
+                Vizhener method<br />(self-generating key)
+            </button>
+            <button class="playfair flex-item">Playfair method</button>
+        </div>
+    </body>
 </html>
