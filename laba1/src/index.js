@@ -18,7 +18,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -45,4 +45,28 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-import {} from './menu.js';
+// import {} from './menu.js';
+
+let ipc = require('electron').ipcRenderer;
+let columnBtn = document.getElementById('column-method').onclick = () => {
+	let columnWindow = createNewWindow(1000, 1000, "column-method.html");
+	columnWindow.show();
+}
+// let columnBtn = document.getElementById('column-method[value');
+
+
+app.whenReady().then(() => {
+	
+/* 	columnWindow.show();
+	columnWindow */
+});
+// app.on("ready", createNewWindow(1000, 1000, "column-method.html"));
+const createNewWindow = (width, height, docName) => {
+	const newWindow = new BrowserWindow({
+		width: width,
+		height: height,
+		show: false,
+	});
+	newWindow.loadFile(path.join(__dirname, docName));
+	return newWindow;
+}
