@@ -13,16 +13,30 @@
             <p>Select the mode and the algorithm</p>
         </div>
         <div class="flex-container">
-          <div class="mode">
-            Mode:<br/>
-              <input type="radio" name="mode" value="encipher" /><span class="checkmark"></span>Encipher<br/>
-              <input type="radio" name="mode" value="decipher" /><span class="checkmark"></span>Decipher
-          </div>
-            <button id="column-method" class="flex-item">Column method</button>
-            <button id="vsioner-selfgen" class="flex-item">
-                Visioner method<br />(self-generating key)
-            </button>
-            <button id="playfair" class="flex-item">Playfair method</button>
+            <div class="mode">
+                Mode:<br />
+                <input type="radio" name="mode" value="encipher" /><span
+                    class="checkmark"
+                ></span
+                >Encipher<br />
+                <input type="radio" name="mode" value="decipher" /><span
+                    class="checkmark"
+                ></span
+                >Decipher
+            </div>
+            <a href="column-method.html">
+                <button id="column-method" class="flex-item">
+                    Column method
+                </button>
+            </a>
+            <a href="visioner-selfgen.html">
+                <button id="vsioner-selfgen" class="flex-item">
+                    Visioner method<br />(self-generating key)
+                </button>
+            </a>
+            <a href="playfair.html">
+                <button id="playfair" class="flex-item">Playfair method</button>
+            </a>
         </div>
     </body>
 </html>
