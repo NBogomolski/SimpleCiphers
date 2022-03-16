@@ -1,0 +1,35 @@
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Message</mat-label>
+  <input
+    matInput
+    maxlength="256"
+    [(ngModel)]="toPerform"
+    placeholder="Ex. I need help with..."
+  />
+</mat-form-field>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Key</mat-label>
+  <input
+    matInput
+    maxlength="256"
+    [(ngModel)]="key"
+    placeholder="Ex. I need help with..."
+  />
+  
+</mat-form-field>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Block width</mat-label>
+  <input
+    matInput
+    maxlength="2"
+    [(ngModel)]="blockwidth"
+    placeholder="Ex. I need help with..."
+  />
+  
+</mat-form-field>
+<div>{{ method }} {{ isEncrypt }}</div>
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput disabled [(ngModel)]="afterCalc" placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<button mat-button class="button-transform" (click)="calc()">Transform</button>
