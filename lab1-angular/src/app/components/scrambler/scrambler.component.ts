@@ -18,7 +18,7 @@ export class ScramblerComponent {
   key: any;
   blockWidth: any;
   @Input() method: Method | undefined;
-  @Input() isEncrypt: boolean | undefined = true;
+  @Input() isEncrypt: boolean | undefined;
 
   onToggleChange() {
     this.afterCalc = "";
