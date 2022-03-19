@@ -110,7 +110,31 @@ export class ScramblerComponent {
 
     return message;
   }
-  visionerEncrypt() {}
+
+  visionerEncrypt(): string {
+    const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
+      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя']; 
+    let encrypted = '', autoKey = this.key;
+    let cypherMatrix = rusAlphabetCapital.slice();
+    if (this.toPerform.length > this.key.length) {
+/*       for (let i = 0; autoKey.length < this.toPerform.length; i++) {
+        autoKey += this.toPerform.charAt(i);
+      } */
+      autoKey += this.key.slice(0, this.toPerform.length-this.key.length + 1);
+    } else {
+      //qwe qwerty
+      autoKey = autoKey.slice(0, this.key.length - this.toPerform.length + 1);
+    }
+    for (let i in this.toPerform) {
+      encrypted += this.encipherChar(this.toPerform.charAt(i), autoKey.charAt(i), rusAlphabetCapital);
+    }
+    return encrypted;
+  }
+
+  encipherChar(plaintextChar: string, startChar: string, alphabet: string[]): string {
+    return alphabet[(alphabet.indexOf(startChar) + alphabet.indexOf(plaintextChar)) % alphabet.length];
+  }
+
   visionerDecrypt() {}
   playfairEncrypt() {}
   playfairDecrypt() {}
