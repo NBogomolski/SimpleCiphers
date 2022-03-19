@@ -2,9 +2,10 @@
   <mat-label>Message</mat-label>
   <input
     matInput
+    required
     maxlength="256"
     [(ngModel)]="toPerform"
-    placeholder="Ex. I need help with..."
+    placeholder="Ex. лаба по ТИ"
   />
 </mat-form-field>
 <mat-form-field class="example-full-width" appearance="fill">
@@ -13,7 +14,7 @@
     matInput
     maxlength="256"
     [(ngModel)]="key"
-    placeholder="Ex. I need help with..."
+    placeholder="Ex. криптография"
   />
   
 </mat-form-field>
@@ -21,15 +22,18 @@
   <mat-label>Block width</mat-label>
   <input
     matInput
+    type="text"
+    pattern="\d*"
     maxlength="2"
-    [(ngModel)]="blockwidth"
-    placeholder="Ex. I need help with..."
+    [(ngModel)]="blockWidth"
+    placeholder="Ex. 5"
   />
   
 </mat-form-field>
+<mat-slide-toggle [(ngModel)]="isEncrypt" (change)="onToggleChange()" >Encrypt</mat-slide-toggle>
 <div>{{ method }} {{ isEncrypt }}</div>
 <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput disabled [(ngModel)]="afterCalc" placeholder="Ex. It makes me feel..."></textarea>
+    <mat-label>Output</mat-label>
+    <textarea matInput readonly [(ngModel)]="afterCalc" placeholder=""></textarea>
 </mat-form-field>
 <button mat-button class="button-transform" (click)="calc()">Transform</button>
