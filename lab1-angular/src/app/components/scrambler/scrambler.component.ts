@@ -1,5 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
+import { SSL_OP_NO_TLSv1_2 } from 'constants';
 
 export enum Method {
   column,
@@ -210,14 +211,57 @@ export class ScramblerComponent {
   }
 
   visionerDecrypt() {
-    const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
-      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
     const autoKey = this.generateAutoKeyDecryption();
     let decrypted = autoKey.slice(this.key.length);
     decrypted += this.visionerDecryptWithin(decrypted.length, this.toPerform.length, autoKey);
     return decrypted;
   }
-  
-  playfairEncrypt() {}
+
+  playfairEncrypt() {
+    const matrix = [
+      [...'crypt'],
+      [...'ogahb'],
+      [...'defik'],
+      [...'lmnqs'],
+      [...'uvwxz'],
+    ];
+    let encrypted = '';
+    for(let currChar = 0; encrypted.length < this.toPerform.length; currChar += 2) {
+      let plainChar1 = this.toPerform.charAt(currChar), plainChar2 = this.toPerform.charAt(currChar + 1);
+      let position1 = this.getPositionOf(plainChar1, matrix);
+      let position2 = this.getPositionOf(plainChar2, matrix);
+      if (!plainChar2) plainChar2 = 'x';
+      if ((position1[0] == position2[0]) && (position1[1] == position2[1])) {
+        this.toPerform = this.toPerform.slice(0, currChar+1) + 'x' + this.toPerform.slice(currChar+1);
+        plainChar2 = 'x';
+        //TODO...
+      } else if (position1[0] == position2[0]) {
+        encrypted += matrix[position1[0] + 1][position1[1]];
+        encrypted += matrix[position2[0] + 1][position2[1]];
+      } else if (position1[1] == position2[1]) {
+        encrypted += matrix[position1[0]][position1[1] + 1];
+        encrypted += matrix[position2[0]][position2[1] + 1];
+      } else {
+
+      }
+    }
+  }
+
+  quadrantCharsPlayfair(plainChar1: string, plainChar2: string, matrix: Array<Array<string>>): string[] {
+    let cipherChars = ['', ''];
+    
+    return cipherChars;
+  }
+
+  getPositionOf(plainChar: string, matrix: Array<Array<string>>): number[] {
+    let indexes = new Array(2);
+    for (let i in matrix) {
+      if (matrix[i].indexOf(plainChar) != -1) {
+        return [Number(i), matrix[i].indexOf(plainChar)];
+      }
+    }
+    return [2, 3]; //j == i
+  }
+
   playfairDecrypt() {}
 }
