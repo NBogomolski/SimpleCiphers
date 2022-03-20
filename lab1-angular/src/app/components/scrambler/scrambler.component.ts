@@ -120,10 +120,10 @@ export class ScramblerComponent {
 /*       for (let i = 0; autoKey.length < this.toPerform.length; i++) {
         autoKey += this.toPerform.charAt(i);
       } */
-      autoKey += this.key.slice(0, this.toPerform.length-this.key.length + 1);
+      autoKey += this.toPerform.slice(0, this.toPerform.length-this.key.length + 1);
     } else {
       //qwe qwerty
-      autoKey = autoKey.slice(0, this.key.length - this.toPerform.length + 1);
+      autoKey = autoKey.slice(0, this.toPerform.length);
     }
     for (let i in this.toPerform) {
       encrypted += this.encipherChar(this.toPerform.charAt(i), autoKey.charAt(i), rusAlphabetCapital);
