@@ -21,7 +21,7 @@ export class ScramblerComponent {
   @Input() isEncrypt: boolean | undefined;
 
   onToggleChange() {
-    this.afterCalc = "";
+    this.afterCalc = '';
   }
 
   calc() {
@@ -90,7 +90,8 @@ export class ScramblerComponent {
     let message = '';
     let keyPrecedence = this.setPrecedence(this.key);
     const arrHeight = Math.ceil(this.toPerform.length / this.key.length);
-    const fullColumnsLength = this.toPerform.length - this.key.length * (arrHeight-1);
+    const fullColumnsLength =
+      this.toPerform.length - this.key.length * (arrHeight - 1);
     let matrix = [];
     for (let i = 0; i < arrHeight; i++) {
       matrix[i] = new Array(this.key.length).fill('');
@@ -98,14 +99,14 @@ export class ScramblerComponent {
     for (let j = 0, encryptedInd = 0; j < this.key.length; j++) {
       let soughtInd = keyPrecedence.indexOf(j);
       for (let i = 0; i < arrHeight; i++) {
-        if ((i == arrHeight-1) && (soughtInd >= fullColumnsLength)) {
+        if (i == arrHeight - 1 && soughtInd >= fullColumnsLength) {
           break;
         }
         matrix[i][soughtInd] = this.toPerform.charAt(encryptedInd++);
       }
     }
     for (let i = 0; i < arrHeight; i++) {
-        message += matrix[i].join('');
+      message += matrix[i].join('');
     }
 
     return message;
@@ -113,29 +114,76 @@ export class ScramblerComponent {
 
   visionerEncrypt(): string {
     const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
-      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя']; 
-    let encrypted = '', autoKey = this.key;
-    let cypherMatrix = rusAlphabetCapital.slice();
-    if (this.toPerform.length > this.key.length) {
-/*       for (let i = 0; autoKey.length < this.toPerform.length; i++) {
-        autoKey += this.toPerform.charAt(i);
-      } */
-      autoKey += this.toPerform.slice(0, this.toPerform.length-this.key.length + 1);
-    } else {
-      //qwe qwerty
-      autoKey = autoKey.slice(0, this.toPerform.length);
-    }
-    for (let i in this.toPerform) {
-      encrypted += this.encipherChar(this.toPerform.charAt(i), autoKey.charAt(i), rusAlphabetCapital);
+      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
+    let encrypted = '';
+    const autoKey = this.generateAutoKey();
+    // let cypherMatrix = rusAlphabetCapital.slice();
+    for (let i = 0; i < this.toPerform.length; i++) {
+      if (rusAlphabetCapital.includes(this.toPerform.charAt(i))) {
+        encrypted += this.encipherCharVisioner(
+          this.toPerform.charAt(i),
+          autoKey.charAt(i),
+          rusAlphabetCapital
+        );
+      } else {
+        encrypted += this.encipherCharVisioner(
+          this.toPerform.charAt(i),
+          autoKey.charAt(i),
+          rusAlphabet
+        );
+      }
     }
     return encrypted;
   }
 
-  encipherChar(plaintextChar: string, startChar: string, alphabet: string[]): string {
-    return alphabet[(alphabet.indexOf(startChar) + alphabet.indexOf(plaintextChar)) % alphabet.length];
+  generateAutoKey(): string {
+    let autoKey = this.key;
+    if (this.toPerform.length > this.key.length) {
+      autoKey += this.toPerform.slice(
+        0,
+        this.toPerform.length - this.key.length + 1
+      );
+    } else {
+      autoKey = autoKey.slice(0, this.toPerform.length);
+    }
+    return autoKey;
   }
 
-  visionerDecrypt() {}
+  encipherCharVisioner(plaintextChar: string, startChar: string, alphabet: string[]): string {
+    return alphabet[
+      (alphabet.indexOf(startChar) + 
+      alphabet.indexOf(plaintextChar)) %
+        alphabet.length
+    ];
+  }
+
+  decipherCharVisioner(ciphertextChar: string, keyChar: string, alphabet: string[]): string {
+    const offsetInd = (alphabet.indexOf(ciphertextChar) - alphabet.indexOf(keyChar));
+    return alphabet[(offsetInd >= 0 ? offsetInd : alphabet.length + offsetInd)];
+  }
+
+  visionerDecrypt() {
+    let decrypted = '';
+    const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
+      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
+    const autoKey = this.generateAutoKey();
+    for (let i = 0; i < this.toPerform.length; i++) {
+      if (rusAlphabetCapital.includes(this.toPerform.charAt(i))) {
+        decrypted += this.decipherCharVisioner(
+          this.toPerform.charAt(i),
+          autoKey.charAt(i),
+          rusAlphabetCapital
+        );
+      } else {
+        decrypted += this.decipherCharVisioner(
+          this.toPerform.charAt(i),
+          autoKey.charAt(i),
+          rusAlphabet
+        );
+      }
+    }
+    return decrypted;
+  }
   playfairEncrypt() {}
   playfairDecrypt() {}
 }
