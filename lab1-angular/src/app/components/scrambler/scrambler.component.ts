@@ -162,12 +162,11 @@ export class ScramblerComponent {
     return alphabet[(offsetInd >= 0 ? offsetInd : alphabet.length + offsetInd)];
   }
 
-  visionerDecrypt() {
-    let decrypted = '';
+  visionerDecryptWithin(startInd: number, endInd: number, autoKey: string, ): string {
     const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
       rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
-    const autoKey = this.generateAutoKey();
-    for (let i = 0; i < this.toPerform.length; i++) {
+    let decrypted = '';
+    for (let i = startInd; i < endInd; i++) {
       if (rusAlphabetCapital.includes(this.toPerform.charAt(i))) {
         decrypted += this.decipherCharVisioner(
           this.toPerform.charAt(i),
@@ -184,6 +183,41 @@ export class ScramblerComponent {
     }
     return decrypted;
   }
+
+  generateAutoKeyDecryption(): string {
+    if (this.key.length >= this.toPerform.length) {
+      return this.generateAutoKey();
+    } else {
+      let autoKeyRestored = this.key, decipherInd = 0; 
+      while (this.toPerform.length > autoKeyRestored.length) {
+        if (this.key.length > (this.toPerform.length - decipherInd)) {
+          autoKeyRestored += this.visionerDecryptWithin(
+            decipherInd,
+            this.toPerform.length,
+            autoKeyRestored
+          );
+        } else {
+          autoKeyRestored += this.visionerDecryptWithin(
+            decipherInd,
+            decipherInd+this.key.length,
+            autoKeyRestored
+          );
+        }
+        decipherInd += this.key.length;
+      }
+      return autoKeyRestored;
+    }
+  }
+
+  visionerDecrypt() {
+    const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
+      rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
+    const autoKey = this.generateAutoKeyDecryption();
+    let decrypted = autoKey.slice(this.key.length);
+    decrypted += this.visionerDecryptWithin(decrypted.length, this.toPerform.length, autoKey);
+    return decrypted;
+  }
+  
   playfairEncrypt() {}
   playfairDecrypt() {}
 }
