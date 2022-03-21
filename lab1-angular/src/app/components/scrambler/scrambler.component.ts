@@ -230,8 +230,11 @@ export class ScramblerComponent {
       let plainChar1 = this.toPerform.charAt(currChar), plainChar2 = this.toPerform.charAt(currChar + 1);
       let position1 = this.getPositionOf(plainChar1, matrix);
       let position2 = this.getPositionOf(plainChar2, matrix);
-      if (!plainChar2) plainChar2 = 'x';
-      if ((position1[0] == position2[0]) && (position1[1] == position2[1])) {
+      if (!plainChar2) {
+        plainChar2 = 'x'; 
+        position2 = this.getPositionOf(plainChar2, matrix);
+      }
+      if (plainChar1 === plainChar2) {
         this.toPerform = this.toPerform.slice(0, currChar+1) + 'x' + this.toPerform.slice(currChar+1);
         plainChar2 = 'x';
         const quadrantValues = this.quadrantCharsPlayfair(
@@ -241,11 +244,11 @@ export class ScramblerComponent {
         );
         encrypted += quadrantValues[0] + quadrantValues[1];
       } else if (position1[0] == position2[0]) {
-        encrypted += matrix[position1[0]][position1[1] + 1];
-        encrypted += matrix[position2[0]][position2[1] + 1];
+        encrypted += matrix[position1[0]][(position1[1] + 1) % matrix.length];
+        encrypted += matrix[position2[0]][(position2[1] + 1) % matrix.length];
       } else if (position1[1] == position2[1]) {
-        encrypted += matrix[position1[0] + 1][position1[1]];
-        encrypted += matrix[position2[0] + 1][position2[1]];
+        encrypted += matrix[(position1[0] + 1) % matrix.length][position1[1]];
+        encrypted += matrix[(position2[0] + 1) % matrix.length][position2[1]];
       } else {
         const quadrantValues = this.quadrantCharsPlayfair(plainChar1, plainChar2, matrix);
         encrypted += quadrantValues[0] + quadrantValues[1];
@@ -270,5 +273,7 @@ export class ScramblerComponent {
     return [2, 3]; //j == i
   }
 
-  playfairDecrypt() {}
+  playfairDecrypt() {
+    
+  }
 }
