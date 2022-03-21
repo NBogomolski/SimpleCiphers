@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
-import { SSL_OP_NO_TLSv1_2 } from 'constants';
+// import { SSL_OP_NO_TLSv1_2 } from 'constants';
 
 export enum Method {
   column,
@@ -234,23 +234,30 @@ export class ScramblerComponent {
       if ((position1[0] == position2[0]) && (position1[1] == position2[1])) {
         this.toPerform = this.toPerform.slice(0, currChar+1) + 'x' + this.toPerform.slice(currChar+1);
         plainChar2 = 'x';
-        //TODO...
+        const quadrantValues = this.quadrantCharsPlayfair(
+          plainChar1,
+          plainChar2,
+          matrix
+        );
+        encrypted += quadrantValues[0] + quadrantValues[1];
       } else if (position1[0] == position2[0]) {
-        encrypted += matrix[position1[0] + 1][position1[1]];
-        encrypted += matrix[position2[0] + 1][position2[1]];
-      } else if (position1[1] == position2[1]) {
         encrypted += matrix[position1[0]][position1[1] + 1];
         encrypted += matrix[position2[0]][position2[1] + 1];
+      } else if (position1[1] == position2[1]) {
+        encrypted += matrix[position1[0] + 1][position1[1]];
+        encrypted += matrix[position2[0] + 1][position2[1]];
       } else {
-
+        const quadrantValues = this.quadrantCharsPlayfair(plainChar1, plainChar2, matrix);
+        encrypted += quadrantValues[0] + quadrantValues[1];
       }
     }
+    return encrypted;
   }
 
   quadrantCharsPlayfair(plainChar1: string, plainChar2: string, matrix: Array<Array<string>>): string[] {
-    let cipherChars = ['', ''];
-    
-    return cipherChars;
+    const position1 = this.getPositionOf(plainChar1, matrix);
+    const position2 = this.getPositionOf(plainChar2, matrix);
+    return [matrix[position1[0]][position2[1]], matrix[position2[0]][position1[1]]];
   }
 
   getPositionOf(plainChar: string, matrix: Array<Array<string>>): number[] {
