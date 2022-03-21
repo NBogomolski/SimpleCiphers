@@ -274,6 +274,65 @@ export class ScramblerComponent {
   }
 
   playfairDecrypt() {
-    
+    const matrix = [
+      [...'crypt'],
+      [...'ogahb'],
+      [...'defik'],
+      [...'lmnqs'],
+      [...'uvwxz'],
+    ];
+    let message = '';
+    for (
+      let currChar = 0;
+      message.length < this.toPerform.length;
+      currChar += 2
+    ) {
+      let cipherChar1 = this.toPerform.charAt(currChar),
+        cipherChar2 = this.toPerform.charAt(currChar + 1);
+      let position1 = this.getPositionOf(cipherChar1, matrix);
+      let position2 = this.getPositionOf(cipherChar2, matrix);
+      if (!cipherChar2) {
+        cipherChar2 = 'x';
+        position2 = this.getPositionOf(cipherChar2, matrix);
+      }
+      if (cipherChar1 === cipherChar2) {
+        this.toPerform =
+          this.toPerform.slice(0, currChar + 1) +
+          'x' +
+          this.toPerform.slice(currChar + 1);
+        cipherChar2 = 'x';
+        const quadrantValues = this.quadrantCharsPlayfair(
+          cipherChar1,
+          cipherChar2,
+          matrix
+        );
+        message += quadrantValues[0] + quadrantValues[1];
+      } else if (position1[0] == position2[0]) {
+        position1[1] = position1[1] == 0 ? matrix.length : position1[1];
+        position2[1] = position2[1] == 0 ? matrix.length : position2[1];
+        message +=
+          matrix[position1[0]][(position1[1] - 1) % matrix.length];
+        message +=
+          matrix[position2[0]][(position2[1] - 1) % matrix.length];
+      } else if (position1[1] == position2[1]) {
+        position1[0] = position1[0] == 0 ? matrix.length : position1[0];
+        position2[0] = position2[0] == 0 ? matrix.length : position2[0];
+        message +=
+          matrix[(position1[0] - 1) % matrix.length][position1[1]];
+        message +=
+          matrix[(position2[0] - 1) % matrix.length][position2[1]];
+      } else {
+        const quadrantValues = this.quadrantCharsPlayfair(
+          cipherChar1,
+          cipherChar2,
+          matrix
+        );
+        message += quadrantValues[0] + quadrantValues[1];
+      }
+    }
+    if (message.length % 2 == 0 && message.charAt(message.length-1)) {
+      message = message.slice(0, message.length-1);
+    }
+    return message;
   }
 }
