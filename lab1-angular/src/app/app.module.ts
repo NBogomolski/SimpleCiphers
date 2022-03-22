@@ -7,20 +7,21 @@ import { AppComponent } from './app.component';
 import { ScramblerComponent } from './components/scrambler/scrambler.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
+import { FileSaverModule } from 'ngx-filesaver';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ScramblerComponent
-  ],
+  declarations: [AppComponent, ScramblerComponent],
   imports: [
+    HttpClientModule,
+    FileSaverModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

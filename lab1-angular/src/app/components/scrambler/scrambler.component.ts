@@ -1,6 +1,8 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
-// import { SSL_OP_NO_TLSv1_2 } from 'constants';
+import { HttpClient } from '@angular/common/http';
+import { FileSaverService } from 'ngx-filesaver';
+import { FileSaverOptions } from 'file-saver';
 
 export enum Method {
   column,
@@ -20,11 +22,13 @@ export class ScramblerComponent {
   blockWidth: any;
   @Input() method: Method | undefined;
   @Input() isEncrypt: boolean | undefined;
-
+  
   onToggleChange() {
     this.afterCalc = '';
   }
 
+  constructor(private httpClient: HttpClient, private fileSaverService: FileSaverService) {}
+  
   calc() {
     this.toPerform = this.toPerform.replace(/\s/g, '');
     switch (this.method) {
@@ -32,9 +36,9 @@ export class ScramblerComponent {
         this.afterCalc = this.isEncrypt
           ? this.columnEncrypt()
           : this.columnDecrypt();
-        break;
-      case Method.visioner:
-        this.afterCalc = this.isEncrypt
+          break;
+          case Method.visioner:
+            this.afterCalc = this.isEncrypt
           ? this.visionerEncrypt()
           : this.visionerDecrypt();
         break;
@@ -44,7 +48,28 @@ export class ScramblerComponent {
           : this.playfairDecrypt();
         break;
     }
+
+        const fileName = `${this.method?.toString}.txt`;
+/*         if (fromRemote) {
+          this.httpClient
+            .get(`assets/files/demo.${type}`, {
+              observe: 'response',
+              responseType: 'blob',
+            })
+            .subscribe((res) => {
+              this.fileSaverService.save(res.body, fileName);
+            });
+          return;
+        } */
+/*         const fileType = this.fileSaverService.genType(fileName);
+        const txtBlob = new Blob([this.afterCalc], { type: fileType });
+        this.fileSaverService.save(txtBlob, fileName); */
+
   }
+
+  
+
+
 
   columnEncrypt(): string {
     let encrypted = '';
