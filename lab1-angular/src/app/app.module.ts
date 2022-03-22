@@ -9,9 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FileSaverModule } from 'ngx-filesaver';
 import { HttpClientModule } from '@angular/common/http';
+import { ColumnComponent } from './view/column/column.component';
+import { VigenerComponent } from './view/vigener/vigener.component';
+import { PlayfairComponent } from './view/playfair/playfair.component';
+import { MainComponent } from './view/main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, ScramblerComponent],
+  declarations: [AppComponent, ScramblerComponent, ColumnComponent, VigenerComponent, PlayfairComponent, MainComponent],
   imports: [
     HttpClientModule,
     FileSaverModule,

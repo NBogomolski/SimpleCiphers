@@ -1,4 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
+// import { ThrowStmt } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileSaverService } from 'ngx-filesaver';
@@ -20,6 +20,7 @@ export class ScramblerComponent {
   afterCalc: any;
   key: any;
   blockWidth: any;
+  Method = Method;
   @Input() method: Method | undefined;
   @Input() isEncrypt: boolean | undefined;
   
@@ -49,21 +50,10 @@ export class ScramblerComponent {
         break;
     }
 
-        const fileName = `${this.method?.toString}.txt`;
-/*         if (fromRemote) {
-          this.httpClient
-            .get(`assets/files/demo.${type}`, {
-              observe: 'response',
-              responseType: 'blob',
-            })
-            .subscribe((res) => {
-              this.fileSaverService.save(res.body, fileName);
-            });
-          return;
-        } */
-/*         const fileType = this.fileSaverService.genType(fileName);
-        const txtBlob = new Blob([this.afterCalc], { type: fileType });
-        this.fileSaverService.save(txtBlob, fileName); */
+        const fileName = `${this.method}.txt`;
+        const fileType = this.fileSaverService.genType(fileName);
+        const txtBlob = new Blob([this.afterCalc], { type: fileType,  });
+        this.fileSaverService.save(txtBlob, fileName);
 
   }
 
