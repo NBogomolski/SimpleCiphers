@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ColumnComponent,
   },
   {
-    path: 'vigener',
+    path: 'vigenere',
     component: VigenerComponent,
   },
   {
