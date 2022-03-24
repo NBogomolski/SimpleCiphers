@@ -9,6 +9,13 @@
         [(ngModel)]="toPerform"
         placeholder="Ex. лаба по ТИ"
       />
+      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+      <div class="file-upload">
+          <button mat-mini-fab color="primary" class="upload-btn"
+            (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+          </button>
+      </div>
     </mat-form-field>
     <mat-form-field *ngIf="method !== Method.playfair" class="example-full-width" appearance="fill">
       <mat-label>Key</mat-label>

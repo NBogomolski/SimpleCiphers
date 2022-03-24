@@ -23,43 +23,52 @@ export class ScramblerComponent {
   Method = Method;
   @Input() method: Method | undefined;
   @Input() isEncrypt: boolean | undefined;
-  
+
   onToggleChange() {
     this.afterCalc = '';
   }
 
-  constructor(private httpClient: HttpClient, private fileSaverService: FileSaverService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private fileSaverService: FileSaverService
+  ) {}
+
   
+  async  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      let fileContents = await file.text();
+      this.toPerform = fileContents;
+    }
+  }
+
   calc() {
-    this.toPerform = this.toPerform.replace(/\s/g, '');
     switch (this.method) {
       case Method.column:
+        this.toPerform = this.toPerform.replace(/[^А-я]/g, '');
         this.afterCalc = this.isEncrypt
           ? this.columnEncrypt()
           : this.columnDecrypt();
-          break;
-          case Method.visioner:
-            this.afterCalc = this.isEncrypt
+        break;
+      case Method.visioner:
+        this.toPerform = this.toPerform.replace(/[^А-я]/g, '');
+        this.afterCalc = this.isEncrypt
           ? this.visionerEncrypt()
           : this.visionerDecrypt();
         break;
       case Method.playfair:
+        this.toPerform = this.toPerform.replace(/[^A-Za-z]/g, '').toLowerCase();
         this.afterCalc = this.isEncrypt
           ? this.playfairEncrypt()
           : this.playfairDecrypt();
         break;
     }
 
-        const fileName = `${this.method}.txt`;
-        const fileType = this.fileSaverService.genType(fileName);
-        const txtBlob = new Blob([this.afterCalc], { type: fileType,  });
-        this.fileSaverService.save(txtBlob, fileName);
-
+    const fileName = `${this.method}.txt`;
+    const fileType = this.fileSaverService.genType(fileName);
+    const txtBlob = new Blob([this.afterCalc], { type: fileType });
+    this.fileSaverService.save(txtBlob, fileName);
   }
-
-  
-
-
 
   columnEncrypt(): string {
     let encrypted = '';
@@ -165,20 +174,32 @@ export class ScramblerComponent {
     return autoKey;
   }
 
-  encipherCharVisioner(plaintextChar: string, startChar: string, alphabet: string[]): string {
+  encipherCharVisioner(
+    plaintextChar: string,
+    startChar: string,
+    alphabet: string[]
+  ): string {
     return alphabet[
-      (alphabet.indexOf(startChar) + 
-      alphabet.indexOf(plaintextChar)) %
+      (alphabet.indexOf(startChar) + alphabet.indexOf(plaintextChar)) %
         alphabet.length
     ];
   }
 
-  decipherCharVisioner(ciphertextChar: string, keyChar: string, alphabet: string[]): string {
-    const offsetInd = (alphabet.indexOf(ciphertextChar) - alphabet.indexOf(keyChar));
-    return alphabet[(offsetInd >= 0 ? offsetInd : alphabet.length + offsetInd)];
+  decipherCharVisioner(
+    ciphertextChar: string,
+    keyChar: string,
+    alphabet: string[]
+  ): string {
+    const offsetInd =
+      alphabet.indexOf(ciphertextChar) - alphabet.indexOf(keyChar);
+    return alphabet[offsetInd >= 0 ? offsetInd : alphabet.length + offsetInd];
   }
 
-  visionerDecryptWithin(startInd: number, endInd: number, autoKey: string, ): string {
+  visionerDecryptWithin(
+    startInd: number,
+    endInd: number,
+    autoKey: string
+  ): string {
     const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
       rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
     let decrypted = '';
@@ -204,9 +225,10 @@ export class ScramblerComponent {
     if (this.key.length >= this.toPerform.length) {
       return this.generateAutoKey();
     } else {
-      let autoKeyRestored = this.key, decipherInd = 0; 
+      let autoKeyRestored = this.key,
+        decipherInd = 0;
       while (this.toPerform.length > autoKeyRestored.length) {
-        if (this.key.length > (this.toPerform.length - decipherInd)) {
+        if (this.key.length > this.toPerform.length - decipherInd) {
           autoKeyRestored += this.visionerDecryptWithin(
             decipherInd,
             this.toPerform.length,
@@ -215,7 +237,7 @@ export class ScramblerComponent {
         } else {
           autoKeyRestored += this.visionerDecryptWithin(
             decipherInd,
-            decipherInd+this.key.length,
+            decipherInd + this.key.length,
             autoKeyRestored
           );
         }
@@ -228,7 +250,11 @@ export class ScramblerComponent {
   visionerDecrypt() {
     const autoKey = this.generateAutoKeyDecryption();
     let decrypted = autoKey.slice(this.key.length);
-    decrypted += this.visionerDecryptWithin(decrypted.length, this.toPerform.length, autoKey);
+    decrypted += this.visionerDecryptWithin(
+      decrypted.length,
+      this.toPerform.length,
+      autoKey
+    );
     return decrypted;
   }
 
@@ -241,16 +267,24 @@ export class ScramblerComponent {
       [...'uvwxz'],
     ];
     let encrypted = '';
-    for(let currChar = 0; encrypted.length < this.toPerform.length; currChar += 2) {
-      let plainChar1 = this.toPerform.charAt(currChar), plainChar2 = this.toPerform.charAt(currChar + 1);
+    for (
+      let currChar = 0;
+      encrypted.length < this.toPerform.length;
+      currChar += 2
+    ) {
+      let plainChar1 = this.toPerform.charAt(currChar),
+        plainChar2 = this.toPerform.charAt(currChar + 1);
       let position1 = this.getPositionOf(plainChar1, matrix);
       let position2 = this.getPositionOf(plainChar2, matrix);
       if (!plainChar2) {
-        plainChar2 = 'x'; 
+        plainChar2 = 'x';
         position2 = this.getPositionOf(plainChar2, matrix);
       }
       if (plainChar1 === plainChar2) {
-        this.toPerform = this.toPerform.slice(0, currChar+1) + 'x' + this.toPerform.slice(currChar+1);
+        this.toPerform =
+          this.toPerform.slice(0, currChar + 1) +
+          'x' +
+          this.toPerform.slice(currChar + 1);
         plainChar2 = 'x';
         const quadrantValues = this.quadrantCharsPlayfair(
           plainChar1,
@@ -265,17 +299,28 @@ export class ScramblerComponent {
         encrypted += matrix[(position1[0] + 1) % matrix.length][position1[1]];
         encrypted += matrix[(position2[0] + 1) % matrix.length][position2[1]];
       } else {
-        const quadrantValues = this.quadrantCharsPlayfair(plainChar1, plainChar2, matrix);
+        const quadrantValues = this.quadrantCharsPlayfair(
+          plainChar1,
+          plainChar2,
+          matrix
+        );
         encrypted += quadrantValues[0] + quadrantValues[1];
       }
     }
     return encrypted;
   }
 
-  quadrantCharsPlayfair(plainChar1: string, plainChar2: string, matrix: Array<Array<string>>): string[] {
+  quadrantCharsPlayfair(
+    plainChar1: string,
+    plainChar2: string,
+    matrix: Array<Array<string>>
+  ): string[] {
     const position1 = this.getPositionOf(plainChar1, matrix);
     const position2 = this.getPositionOf(plainChar2, matrix);
-    return [matrix[position1[0]][position2[1]], matrix[position2[0]][position1[1]]];
+    return [
+      matrix[position1[0]][position2[1]],
+      matrix[position2[0]][position1[1]],
+    ];
   }
 
   getPositionOf(plainChar: string, matrix: Array<Array<string>>): number[] {
@@ -325,17 +370,13 @@ export class ScramblerComponent {
       } else if (position1[0] == position2[0]) {
         position1[1] = position1[1] == 0 ? matrix.length : position1[1];
         position2[1] = position2[1] == 0 ? matrix.length : position2[1];
-        message +=
-          matrix[position1[0]][(position1[1] - 1) % matrix.length];
-        message +=
-          matrix[position2[0]][(position2[1] - 1) % matrix.length];
+        message += matrix[position1[0]][(position1[1] - 1) % matrix.length];
+        message += matrix[position2[0]][(position2[1] - 1) % matrix.length];
       } else if (position1[1] == position2[1]) {
         position1[0] = position1[0] == 0 ? matrix.length : position1[0];
         position2[0] = position2[0] == 0 ? matrix.length : position2[0];
-        message +=
-          matrix[(position1[0] - 1) % matrix.length][position1[1]];
-        message +=
-          matrix[(position2[0] - 1) % matrix.length][position2[1]];
+        message += matrix[(position1[0] - 1) % matrix.length][position1[1]];
+        message += matrix[(position2[0] - 1) % matrix.length][position2[1]];
       } else {
         const quadrantValues = this.quadrantCharsPlayfair(
           cipherChar1,
@@ -345,8 +386,8 @@ export class ScramblerComponent {
         message += quadrantValues[0] + quadrantValues[1];
       }
     }
-    if (message.length % 2 == 0 && message.charAt(message.length-1)) {
-      message = message.slice(0, message.length-1);
+    if (message.length % 2 == 0 && message.charAt(message.length - 1)) {
+      message = message.slice(0, message.length - 1);
     }
     return message;
   }
