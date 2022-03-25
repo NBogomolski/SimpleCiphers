@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileSaverService } from 'ngx-filesaver';
 import { FileSaverOptions } from 'file-saver';
+import { stringify } from 'querystring';
 
 export enum Method {
   column,
@@ -93,7 +94,14 @@ export class ScramblerComponent {
       }
     }
 
-    return encrypted;
+    return this.spaceOut(encrypted, this.blockWidth);
+  }
+
+  spaceOut(str: string, eachInd: number): string {
+    const regex = new RegExp(`.{1,${eachInd}}`, 'g');
+    const resArr = str.match(regex);
+    let resStr = resArr?.join(' ') ?? str;
+    return resStr;
   }
 
   //the lower the number - the more the presedence
