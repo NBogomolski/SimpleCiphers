@@ -43,22 +43,25 @@ export class ScramblerComponent {
   }
 
   calc() {
+    let actualKey, actualToPerform;
     switch (this.method) {
       case Method.column:
-        this.afterCalc = this.isEncrypt
-          ? this.columnEncrypt(
-              this.toPerform.replace(/[^А-я]/g, '').toUpperCase(),
-              this.key.replace(/[^А-я]/g, '')
-            )
-          : this.columnDecrypt(
-              this.toPerform.replace(/[^А-я]/g, '').toUpperCase(),
-              this.key.replace(/[^А-я]/g, '')
-            );
+        actualKey = this.key.replace(/[^А-яЁё]/g, ''),
+          actualToPerform = this.toPerform.replace(/[^А-яЁё]/g, '').toUpperCase();
+        if (actualKey) {
+          this.afterCalc = this.isEncrypt
+            ? this.columnEncrypt(actualToPerform, actualKey)
+            : this.columnDecrypt(
+                this.toPerform.replace(/[^А-яЁё]/g, '').toUpperCase(),
+                this.key.replace(/[^А-яЁё]/g, '')
+              );
+        }
         break;
       case Method.visioner:
-        this.toPerform = this.toPerform.replace(/[^А-я]/g, '');
+        this.toPerform = actualToPerform = this.toPerform.replace(/[^А-яЁё]/g, '');
+        actualKey = this.key.replace(/[^А-яЁё]/g, '').toUpperCase();
         this.afterCalc = this.isEncrypt
-          ? this.visionerEncrypt()
+          ? this.visionerEncrypt(actualKey)
           : this.visionerDecrypt();
         break;
       case Method.playfair:
@@ -69,10 +72,12 @@ export class ScramblerComponent {
         break;
     }
 
-    const fileName = `${this.method}.txt`;
-    const fileType = this.fileSaverService.genType(fileName);
-    const txtBlob = new Blob([this.afterCalc], { type: fileType });
-    this.fileSaverService.save(txtBlob, fileName);
+    if (this.afterCalc) {
+      const fileName = `${this.method}.txt`;
+      const fileType = this.fileSaverService.genType(fileName);
+      const txtBlob = new Blob([this.afterCalc], { type: fileType });
+      this.fileSaverService.save(txtBlob, fileName);
+    }
   }
 
   columnEncrypt(toPerform: string, key: string): string {
@@ -145,11 +150,11 @@ export class ScramblerComponent {
     return message;
   }
 
-  visionerEncrypt(): string {
+  visionerEncrypt(key: string): string {
     const rusAlphabetCapital = [...'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'],
       rusAlphabet = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'];
     let encrypted = '';
-    const autoKey = this.generateAutoKey();
+    const autoKey = this.generateAutoKey(key);
     // let cypherMatrix = rusAlphabetCapital.slice();
     for (let i = 0; i < this.toPerform.length; i++) {
       if (rusAlphabetCapital.includes(this.toPerform.charAt(i))) {
@@ -169,12 +174,12 @@ export class ScramblerComponent {
     return encrypted;
   }
 
-  generateAutoKey(): string {
-    let autoKey = this.key;
-    if (this.toPerform.length > this.key.length) {
+  generateAutoKey(key: string): string {
+    let autoKey = key;
+    if (this.toPerform.length > key.length) {
       autoKey += this.toPerform.slice(
         0,
-        this.toPerform.length - this.key.length + 1
+        this.toPerform.length - key.length + 1
       );
     } else {
       autoKey = autoKey.slice(0, this.toPerform.length);
@@ -231,7 +236,7 @@ export class ScramblerComponent {
 
   generateAutoKeyDecryption(): string {
     if (this.key.length >= this.toPerform.length) {
-      return this.generateAutoKey();
+      return this.generateAutoKey(this.key);
     } else {
       let autoKeyRestored = this.key,
         decipherInd = 0;
@@ -394,7 +399,7 @@ export class ScramblerComponent {
         message += quadrantValues[0] + quadrantValues[1];
       }
     }
-    if (message.length % 2 == 0 && message.charAt(message.length - 1)) {
+    if ((message.length % 2 == 0) && (message.charAt(message.length - 1) == 'x')) {
       message = message.slice(0, message.length - 1);
     }
     return message;
