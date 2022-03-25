@@ -34,8 +34,7 @@ export class ScramblerComponent {
     private fileSaverService: FileSaverService
   ) {}
 
-  
-  async  onFileSelected(event: any) {
+  async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
       let fileContents = await file.text();
@@ -46,10 +45,15 @@ export class ScramblerComponent {
   calc() {
     switch (this.method) {
       case Method.column:
-        this.toPerform = this.toPerform.replace(/[^А-я]/g, '');
         this.afterCalc = this.isEncrypt
-          ? this.columnEncrypt()
-          : this.columnDecrypt();
+          ? this.columnEncrypt(
+              this.toPerform.replace(/[^А-я]/g, '').toUpperCase(),
+              this.key.replace(/[^А-я]/g, '')
+            )
+          : this.columnDecrypt(
+              this.toPerform.replace(/[^А-я]/g, '').toUpperCase(),
+              this.key.replace(/[^А-я]/g, '')
+            );
         break;
       case Method.visioner:
         this.toPerform = this.toPerform.replace(/[^А-я]/g, '');
@@ -71,22 +75,18 @@ export class ScramblerComponent {
     this.fileSaverService.save(txtBlob, fileName);
   }
 
-  columnEncrypt(): string {
+  columnEncrypt(toPerform: string, key: string): string {
     let encrypted = '';
-    let precedence: number[] = this.setPrecedence(this.key);
-    const arrHeight = Math.ceil(this.toPerform.length / this.key.length);
+    let precedence: number[] = this.setPrecedence(key);
+    const arrHeight = Math.ceil(toPerform.length / key.length);
     let matrix = [];
     let startInd = 0;
     for (let i = 0; i < arrHeight; i++) {
-      // matrix.fill(this.toPerform.slice(0, matrix.length-1));
-      let substring = this.toPerform.slice(
-        startInd,
-        startInd + this.key.length
-      );
+      let substring = toPerform.slice(startInd, startInd + key.length);
       matrix.push([...substring]);
-      startInd += this.key.length;
+      startInd += key.length;
     }
-    for (let j = 0; j < this.key.length; j++) {
+    for (let j = 0; j < key.length; j++) {
       for (let i = 0; i < arrHeight; i++) {
         encrypted += matrix[i][precedence.indexOf(j)]
           ? matrix[i][precedence.indexOf(j)]
@@ -119,23 +119,23 @@ export class ScramblerComponent {
     return precedence;
   }
 
-  columnDecrypt(): string {
+  columnDecrypt(toPerform: string, key: string): string {
     let message = '';
-    let keyPrecedence = this.setPrecedence(this.key);
-    const arrHeight = Math.ceil(this.toPerform.length / this.key.length);
+    let keyPrecedence = this.setPrecedence(key);
+    const arrHeight = Math.ceil(toPerform.length / key.length);
     const fullColumnsLength =
-      this.toPerform.length - this.key.length * (arrHeight - 1);
+      toPerform.length - key.length * (arrHeight - 1);
     let matrix = [];
     for (let i = 0; i < arrHeight; i++) {
-      matrix[i] = new Array(this.key.length).fill('');
+      matrix[i] = new Array(key.length).fill('');
     }
-    for (let j = 0, encryptedInd = 0; j < this.key.length; j++) {
+    for (let j = 0, encryptedInd = 0; j < key.length; j++) {
       let soughtInd = keyPrecedence.indexOf(j);
       for (let i = 0; i < arrHeight; i++) {
         if (i == arrHeight - 1 && soughtInd >= fullColumnsLength) {
           break;
         }
-        matrix[i][soughtInd] = this.toPerform.charAt(encryptedInd++);
+        matrix[i][soughtInd] = toPerform.charAt(encryptedInd++);
       }
     }
     for (let i = 0; i < arrHeight; i++) {
