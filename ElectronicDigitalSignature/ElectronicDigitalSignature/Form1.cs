@@ -224,7 +224,7 @@ namespace ElectronicDigitalSignature
                 }
                 catch
                 {
-                    MessageBox.Show("Файл не подписан", "Ошибка");
+                    MessageBox.Show("Couldn't sign the file", "Error");
                     return;
                 }
             }
@@ -238,11 +238,11 @@ namespace ElectronicDigitalSignature
             SignatureTextBox.Text = signature.ToString();
             if (signature == fileSignature)
             {
-                MessageBox.Show("Подписи совпадают", "Результат проверки");
+                MessageBox.Show("Signatures DO coincide", "Validation results");
             }
             else
             {
-                MessageBox.Show($"Подписи не совпадают\nПодпись в файле: { fileSignature }\nПодпись текста: { signature }", "Результат проверки");
+                MessageBox.Show($"Signatures DO NOT match\nFile-contained signature: { fileSignature }\nText signature: { signature }", "Validation results");
             }
         }
 
