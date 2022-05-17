@@ -1,0 +1,34 @@
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.AssemblyReference.cache
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.MainForm.resources
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.GenerateResource.cache
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.GeneratedMSBuildEditorConfig.editorconfig
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.AssemblyInfoInputs.cache
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.AssemblyInfo.cs
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.CoreCompileInputs.cache
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.exe
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.deps.json
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.runtimeconfig.json
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.dll
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ref\ElectronicDigitalSignature.dll
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.pdb
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.dll
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ref\ElectronicDigitalSignature.dll
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.pdb
+D:\term 4\TI\lab4\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.genruntimeconfig.cache
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.exe
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.deps.json
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.runtimeconfig.json
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.dll
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ref\ElectronicDigitalSignature.dll
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\bin\Debug\net6.0-windows\ElectronicDigitalSignature.pdb
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.AssemblyReference.cache
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.MainForm.resources
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.GenerateResource.cache
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.GeneratedMSBuildEditorConfig.editorconfig
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.AssemblyInfoInputs.cache
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.AssemblyInfo.cs
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.csproj.CoreCompileInputs.cache
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.dll
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ref\ElectronicDigitalSignature.dll
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.pdb
+E:\TI_Labs\Lab4_EDS\ElectronicDigitalSignature\ElectronicDigitalSignature\obj\Debug\net6.0-windows\ElectronicDigitalSignature.genruntimeconfig.cache

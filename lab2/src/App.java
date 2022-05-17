@@ -10,8 +10,10 @@ import javax.imageio.ImageIO;
 
 public class App {
     public static void main(String[] args) {
+        Frame frame = new Frame();
+
         String s = "%";
-        String registerText = "";
+        String registerText = "111000";
         File pic = new File("./TCP_IP.png");
         
 
@@ -36,6 +38,7 @@ public class App {
                 bitIndex++;
             }
         }
+
 
         System.out.println("'" + s + "' to binary: " + displayBitSet(bs));
         System.out.println(xorIndexes(bs, 1,6,6,6));
