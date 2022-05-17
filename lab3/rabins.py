@@ -21,7 +21,7 @@ def check_keys(p, q, b):
     if p * q < b:
         raise ValueError("b is greater than p * q")
 
-    if p * q < 256:
+    if p * q < 209: #changed from 256
         raise ValueError("Small values of p and q")
 
     return True
