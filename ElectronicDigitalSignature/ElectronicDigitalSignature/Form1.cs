@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Numerics;
+using System.Text;
 namespace ElectronicDigitalSignature
 {
     public partial class MainForm : Form
@@ -72,7 +73,7 @@ namespace ElectronicDigitalSignature
             decimal g0 = mod, g1 = e, u0 = 1, v0 = 0, u1 = 0, v1 = 1;
             while (g1 != 0)
             {
-                decimal y = (int)(g0 / g1);
+                decimal y = (UInt64)(g0 / g1);
                 decimal gi = g0 - y * g1;
                 decimal ui = u0 - y * u1;
                 decimal vi = v0 - y * v1;
@@ -103,7 +104,17 @@ namespace ElectronicDigitalSignature
                 MessageBox.Show("Q should be a prime number", "Input error");
                 return;
             }
-            decimal r = p * q, phi_r = EulersFunctionForPrimes(p) * EulersFunctionForPrimes(q);
+            decimal phi_r = 1, r = 1;
+            try
+            {
+                r = p * q;
+                phi_r = EulersFunctionForPrimes(p) * EulersFunctionForPrimes(q);
+            }
+            catch
+            {
+                MessageBox.Show($"p * q is too large to process", "Input error");
+                return;
+            }
 
             if (phi_r < 3)
             {
@@ -148,6 +159,7 @@ namespace ElectronicDigitalSignature
             {
                 text = reader.ReadToEnd();
             }
+            textBoxContent.Text = text;
             decimal p = PNumeric.Value;
             decimal q = QNumeric.Value;
             decimal r = p * q;
@@ -199,6 +211,7 @@ namespace ElectronicDigitalSignature
                 try
                 {
                     text = reader.ReadToEnd();
+                    textBoxContent.Text = text;
                     for (int i = text.Length - 1; i >= 0; i--)
                     {
                         if (text[i] == '\n')
@@ -231,6 +244,11 @@ namespace ElectronicDigitalSignature
             {
                 MessageBox.Show($"Подписи не совпадают\nПодпись в файле: { fileSignature }\nПодпись текста: { signature }", "Результат проверки");
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -43,6 +43,8 @@
             this.SignatureTextBox = new System.Windows.Forms.TextBox();
             this.SignFileButton = new System.Windows.Forms.Button();
             this.CheckFileButton = new System.Windows.Forms.Button();
+            this.textBoxContent = new System.Windows.Forms.RichTextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ENumeric)).BeginInit();
@@ -150,15 +152,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(81, 53);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(108, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 15);
+            this.label4.Size = new System.Drawing.Size(25, 22);
             this.label4.TabIndex = 6;
             this.label4.Text = "d:";
             // 
             // DTextBox
             // 
-            this.DTextBox.Location = new System.Drawing.Point(81, 70);
+            this.DTextBox.Location = new System.Drawing.Point(139, 56);
             this.DTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DTextBox.Name = "DTextBox";
             this.DTextBox.ReadOnly = true;
@@ -167,7 +170,7 @@
             // 
             // CheckValuesButton
             // 
-            this.CheckValuesButton.Location = new System.Drawing.Point(12, 223);
+            this.CheckValuesButton.Location = new System.Drawing.Point(12, 389);
             this.CheckValuesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckValuesButton.Name = "CheckValuesButton";
             this.CheckValuesButton.Size = new System.Drawing.Size(184, 69);
@@ -179,15 +182,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(81, 103);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(77, 89);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 15);
+            this.label5.Size = new System.Drawing.Size(56, 25);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Хеш-образ:";
+            this.label5.Text = "Hash:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // DigestTextBox
             // 
-            this.DigestTextBox.Location = new System.Drawing.Point(81, 120);
+            this.DigestTextBox.Location = new System.Drawing.Point(139, 92);
             this.DigestTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DigestTextBox.Name = "DigestTextBox";
             this.DigestTextBox.ReadOnly = true;
@@ -197,15 +202,16 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(81, 154);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(42, 125);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 15);
+            this.label6.Size = new System.Drawing.Size(91, 25);
             this.label6.TabIndex = 11;
-            this.label6.Text = "ЭЦП:";
+            this.label6.Text = "Signature:";
             // 
             // SignatureTextBox
             // 
-            this.SignatureTextBox.Location = new System.Drawing.Point(81, 172);
+            this.SignatureTextBox.Location = new System.Drawing.Point(139, 128);
             this.SignatureTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SignatureTextBox.Name = "SignatureTextBox";
             this.SignatureTextBox.ReadOnly = true;
@@ -215,7 +221,7 @@
             // SignFileButton
             // 
             this.SignFileButton.Enabled = false;
-            this.SignFileButton.Location = new System.Drawing.Point(220, 223);
+            this.SignFileButton.Location = new System.Drawing.Point(220, 389);
             this.SignFileButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SignFileButton.Name = "SignFileButton";
             this.SignFileButton.Size = new System.Drawing.Size(184, 67);
@@ -227,7 +233,7 @@
             // CheckFileButton
             // 
             this.CheckFileButton.Enabled = false;
-            this.CheckFileButton.Location = new System.Drawing.Point(433, 224);
+            this.CheckFileButton.Location = new System.Drawing.Point(433, 390);
             this.CheckFileButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckFileButton.Name = "CheckFileButton";
             this.CheckFileButton.Size = new System.Drawing.Size(181, 67);
@@ -236,11 +242,32 @@
             this.CheckFileButton.UseVisualStyleBackColor = true;
             this.CheckFileButton.Click += new System.EventHandler(this.CheckFileButton_Click);
             // 
+            // textBoxContent
+            // 
+            this.textBoxContent.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxContent.Location = new System.Drawing.Point(139, 175);
+            this.textBoxContent.Name = "textBoxContent";
+            this.textBoxContent.Size = new System.Drawing.Size(475, 198);
+            this.textBoxContent.TabIndex = 15;
+            this.textBoxContent.Text = "";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(23, 165);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 25);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "File Content:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 303);
+            this.ClientSize = new System.Drawing.Size(627, 472);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBoxContent);
             this.Controls.Add(this.CheckFileButton);
             this.Controls.Add(this.SignFileButton);
             this.Controls.Add(this.SignatureTextBox);
@@ -258,7 +285,6 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
-            this.Text = "Электронная Цифровая Подпись";
             ((System.ComponentModel.ISupportInitialize)(this.PNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ENumeric)).EndInit();
@@ -284,5 +310,7 @@
         private TextBox SignatureTextBox;
         private Button SignFileButton;
         private Button CheckFileButton;
+        private RichTextBox textBoxContent;
+        private Label label7;
     }
 }
