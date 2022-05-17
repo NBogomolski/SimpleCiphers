@@ -172,7 +172,7 @@
             this.CheckValuesButton.Name = "CheckValuesButton";
             this.CheckValuesButton.Size = new System.Drawing.Size(184, 69);
             this.CheckValuesButton.TabIndex = 8;
-            this.CheckValuesButton.Text = "Проверить введённые значения";
+            this.CheckValuesButton.Text = "Submit entered values";
             this.CheckValuesButton.UseVisualStyleBackColor = true;
             this.CheckValuesButton.Click += new System.EventHandler(this.CheckValuesButton_Click);
             // 
@@ -220,7 +220,7 @@
             this.SignFileButton.Name = "SignFileButton";
             this.SignFileButton.Size = new System.Drawing.Size(184, 67);
             this.SignFileButton.TabIndex = 13;
-            this.SignFileButton.Text = "Открыть файл для подписи";
+            this.SignFileButton.Text = "Sign a file";
             this.SignFileButton.UseVisualStyleBackColor = true;
             this.SignFileButton.Click += new System.EventHandler(this.SignFileButton_Click);
             // 
@@ -232,7 +232,7 @@
             this.CheckFileButton.Name = "CheckFileButton";
             this.CheckFileButton.Size = new System.Drawing.Size(181, 67);
             this.CheckFileButton.TabIndex = 14;
-            this.CheckFileButton.Text = "Открыть файл для проверки подписи";
+            this.CheckFileButton.Text = "Validate the signature of a file";
             this.CheckFileButton.UseVisualStyleBackColor = true;
             this.CheckFileButton.Click += new System.EventHandler(this.CheckFileButton_Click);
             // 

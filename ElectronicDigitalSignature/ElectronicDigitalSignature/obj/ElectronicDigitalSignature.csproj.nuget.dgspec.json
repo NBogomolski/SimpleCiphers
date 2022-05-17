@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\TI_Labs\\Lab4_EDS\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj": {}
+    "D:\\TI\\TI_labs\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj": {}
   },
   "projects": {
-    "E:\\TI_Labs\\Lab4_EDS\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj": {
+    "D:\\TI\\TI_labs\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\TI_Labs\\Lab4_EDS\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj",
+        "projectUniqueName": "D:\\TI\\TI_labs\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj",
         "projectName": "ElectronicDigitalSignature",
-        "projectPath": "E:\\TI_Labs\\Lab4_EDS\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj",
+        "projectPath": "D:\\TI\\TI_labs\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\ElectronicDigitalSignature.csproj",
         "packagesPath": "C:\\Users\\nikbo\\.nuget\\packages\\",
-        "outputPath": "E:\\TI_Labs\\Lab4_EDS\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\obj\\",
+        "outputPath": "D:\\TI\\TI_labs\\ElectronicDigitalSignature\\ElectronicDigitalSignature\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\Visual Studio\\NON-ide\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\nikbo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

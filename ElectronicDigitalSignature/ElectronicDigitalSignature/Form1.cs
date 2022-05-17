@@ -1,4 +1,4 @@
-using System.Text;
+п»їusing System.Text;
 namespace ElectronicDigitalSignature
 {
     public partial class MainForm : Form
@@ -95,23 +95,30 @@ namespace ElectronicDigitalSignature
             decimal e = ENumeric.Value;
             if (!IsPrime(p))
             {
-                MessageBox.Show("Число P должно быть простым", "Ошибка ввода");
+                MessageBox.Show("P should be a prime number", "Input error");
                 return;
             }
             if (!IsPrime(q))
             {
-                MessageBox.Show("Число Q должно быть простым", "Ошибка ввода");
+                MessageBox.Show("Q should be a prime number", "Input error");
                 return;
             }
             decimal r = p * q, phi_r = EulersFunctionForPrimes(p) * EulersFunctionForPrimes(q);
+
+            if (phi_r < 3)
+            {
+                MessageBox.Show($"П† ({ phi_r }) leaves no room for 1<e<П†", "Input error");
+                return;
+            }
+
             if (e >= phi_r)
             {
-                MessageBox.Show($"Число e должно быть меньше, чем { phi_r }", "Ошибка ввода");
+                MessageBox.Show($"e should equal less than { phi_r }", "Input error");
                 return;
             }
             if (GetGCD(e, phi_r) != 1)
             {
-                MessageBox.Show($"Число e должно быть взаимно простым с { phi_r }", "Ошибка ввода");
+                MessageBox.Show($"e should be relatively prime to { phi_r }", "Input error");
                 return;
             }
             decimal d = MultInverse(e, phi_r);
@@ -149,7 +156,10 @@ namespace ElectronicDigitalSignature
             DigestTextBox.Text = digest.ToString();
             decimal signature = Power(digest, d, r);
             SignatureTextBox.Text = signature.ToString();
-            using (StreamWriter writer = new StreamWriter("signed_text.txt", false))
+
+            string nativeFilePath = Path.GetDirectoryName(filename);
+
+            using (StreamWriter writer = new StreamWriter(nativeFilePath+"\\signed.txt"))
             {
                 writer.WriteLine(text);
                 writer.Write(signature.ToString());
@@ -201,7 +211,7 @@ namespace ElectronicDigitalSignature
                 }
                 catch
                 {
-                    MessageBox.Show("Файл не подписан", "Ошибка");
+                    MessageBox.Show("Р¤Р°Р№Р» РЅРµ РїРѕРґРїРёСЃР°РЅ", "РћС€РёР±РєР°");
                     return;
                 }
             }
@@ -215,11 +225,11 @@ namespace ElectronicDigitalSignature
             SignatureTextBox.Text = signature.ToString();
             if (signature == fileSignature)
             {
-                MessageBox.Show("Подписи совпадают", "Результат проверки");
+                MessageBox.Show("РџРѕРґРїРёСЃРё СЃРѕРІРїР°РґР°СЋС‚", "Р РµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂРєРё");
             }
             else
             {
-                MessageBox.Show($"Подписи не совпадают\nПодпись в файле: { fileSignature }\nПодпись текста: { signature }", "Результат проверки");
+                MessageBox.Show($"РџРѕРґРїРёСЃРё РЅРµ СЃРѕРІРїР°РґР°СЋС‚\nРџРѕРґРїРёСЃСЊ РІ С„Р°Р№Р»Рµ: { fileSignature }\nРџРѕРґРїРёСЃСЊ С‚РµРєСЃС‚Р°: { signature }", "Р РµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂРєРё");
             }
         }
     }
