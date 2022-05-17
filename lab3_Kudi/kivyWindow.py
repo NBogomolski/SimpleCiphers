@@ -46,7 +46,7 @@ class Window(App):
 
             self.textFieldOut.text = " ".join([str(x) for x in out_bytes])
         except ValueError as err:
-            self.textFieldOut.text = "KeyError: " + str(err)
+            self.textFieldOut.text = "Error: " + str(err)
         except:
             self.textFieldOut.text = "Unexpected error"
 
@@ -133,7 +133,7 @@ class Window(App):
         lblBKey = Label(text="b:", size_hint=(0.3, 1), font_size=40)
         lblInFile = Label(text="Source file",
                           size_hint=(1, 0.1), font_size=30, valign="center")
-        lblOutFile = Label(text=f"Result \n({PATH})", size_hint=(1, 0.1), font_size=30, valign="center", halign="center")
+        lblOutFile = Label(text=f"Result \n({PATH})", size_hint=(1, 0.1), font_size=30, valign="top", halign="center")
 
         lblPKey.color = [0, 0, 0, 1]
         lblQKey.color = [0, 0, 0, 1]
@@ -145,11 +145,11 @@ class Window(App):
         self.textFieldIn = TextInput()  # field of content of initial file
         self.textFieldOut = TextInput()  # field of content of out file
         self.textFieldPKey = TextInput(
-            multiline=False, size_hint=(1, 1), font_size=28)
+            multiline=False, size_hint=(1, 1), font_size=25, input_filter="int")
         self.textFieldQKey = TextInput(
-            multiline=False, size_hint=(1, 1), font_size=28)
+            multiline=False, size_hint=(1, 1), font_size=25, input_filter="int")
         self.textFieldBKey = TextInput(
-            multiline=False, size_hint=(1, 1), font_size=28)
+            multiline=False, size_hint=(1, 1), font_size=25, input_filter="int")
 
 
         # relative font size
