@@ -131,9 +131,9 @@ class Window(App):
         lblPKey = Label(text="p:", size_hint=(0.3, 1), font_size=40)
         lblQKey = Label(text="q:", size_hint=(0.3, 1), font_size=40)
         lblBKey = Label(text="b:", size_hint=(0.3, 1), font_size=40)
-        lblInFile = Label(text="Initial file",
-                          size_hint=(1, 0.1), font_size=40)
-        lblOutFile = Label(text="Out file", size_hint=(1, 0.1), font_size=40)
+        lblInFile = Label(text="Source file",
+                          size_hint=(1, 0.1), font_size=30, valign="center")
+        lblOutFile = Label(text=f"Result \n({PATH})", size_hint=(1, 0.1), font_size=30, valign="center", halign="center")
 
         lblPKey.color = [0, 0, 0, 1]
         lblQKey.color = [0, 0, 0, 1]
@@ -144,9 +144,13 @@ class Window(App):
         # TextInputs
         self.textFieldIn = TextInput()  # field of content of initial file
         self.textFieldOut = TextInput()  # field of content of out file
-        self.textFieldPKey = TextInput(multiline=False, size_hint=(1, 1), font_size=28)
-        self.textFieldQKey = TextInput(multiline=False, size_hint=(1, 1), font_size=28)
-        self.textFieldBKey = TextInput(multiline=False, size_hint=(1, 1), font_size=28)
+        self.textFieldPKey = TextInput(
+            multiline=False, size_hint=(1, 1), font_size=28)
+        self.textFieldQKey = TextInput(
+            multiline=False, size_hint=(1, 1), font_size=28)
+        self.textFieldBKey = TextInput(
+            multiline=False, size_hint=(1, 1), font_size=28)
+
 
         # relative font size
         font_size_general = 20
@@ -174,7 +178,6 @@ class Window(App):
         # generalLayout.add_widget(keyWidgetsLayout)
         generalLayout.add_widget(inFieldLayout)
         generalLayout.add_widget(outFieldLayout)
-
 
         mainLayout.add_widget(generalLayout)
         mainLayout.add_widget(keyWidgetsLayout)
