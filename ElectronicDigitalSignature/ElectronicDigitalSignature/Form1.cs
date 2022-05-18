@@ -93,7 +93,7 @@ namespace ElectronicDigitalSignature
         {
             decimal p = PNumeric.Value;
             decimal q = QNumeric.Value;
-            decimal e = ENumeric.Value;
+            decimal d = ENumeric.Value;
             if (!IsPrime(p))
             {
                 MessageBox.Show("P should be a prime number", "Input error");
@@ -122,18 +122,24 @@ namespace ElectronicDigitalSignature
                 return;
             }
 
-            if (e >= phi_r)
+            /* if (d >= phi_r)
+             {
+                 MessageBox.Show($"e should equal less than { phi_r }", "Input error");
+                 return;
+             }*/
+            /*            if (GetGCD(e, phi_r) != 1)
+                        {
+                            MessageBox.Show($"e should be relatively prime to { phi_r }", "Input error");
+                            return;
+                        }*/
+            decimal e;
+            for (e = 2; e < phi_r; e += 1)
             {
-                MessageBox.Show($"e should equal less than { phi_r }", "Input error");
-                return;
+                if (e * d % phi_r == 1)
+                    break;
             }
-            if (GetGCD(e, phi_r) != 1)
-            {
-                MessageBox.Show($"e should be relatively prime to { phi_r }", "Input error");
-                return;
-            }
-            decimal d = MultInverse(e, phi_r);
-            DTextBox.Text = d.ToString();
+
+            DTextBox.Text = e.ToString();
             SignFileButton.Enabled = true;
             CheckFileButton.Enabled = true;
         }
@@ -163,7 +169,7 @@ namespace ElectronicDigitalSignature
             decimal p = PNumeric.Value;
             decimal q = QNumeric.Value;
             decimal r = p * q;
-            decimal d = Convert.ToDecimal(DTextBox.Text);
+            decimal d = Convert.ToDecimal(ENumeric.Text);
             decimal digest = getDigest(text, r);
             DigestTextBox.Text = digest.ToString();
             decimal signature = Power(digest, d, r);
@@ -231,7 +237,7 @@ namespace ElectronicDigitalSignature
             decimal p = PNumeric.Value;
             decimal q = QNumeric.Value;
             decimal r = p * q;
-            decimal d = Convert.ToDecimal(DTextBox.Text);
+            decimal d = Convert.ToDecimal(ENumeric.Text);
             decimal digest = getDigest(text, r);
             DigestTextBox.Text = digest.ToString();
             decimal signature = Power(digest, d, r);

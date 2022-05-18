@@ -121,9 +121,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(461, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(16, 15);
+            this.label3.Size = new System.Drawing.Size(17, 15);
             this.label3.TabIndex = 4;
-            this.label3.Text = "e:";
+            this.label3.Text = "d:";
             // 
             // ENumeric
             // 
@@ -157,7 +157,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 22);
             this.label4.TabIndex = 6;
-            this.label4.Text = "d:";
+            this.label4.Text = "e:";
             // 
             // DTextBox
             // 
